@@ -65,4 +65,8 @@ function todoCount() {
   let count = listItemCount.length;
 
   countElement.innerHTML = `${count} tasks left`;
+
+  if (count == 0) {
+    countElement.innerHTML = "";
+  }
 }
