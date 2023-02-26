@@ -7,15 +7,12 @@ function handleSubmitForm(e) {
   e.preventDefault();
   let input = document.getElementById("task");
   if (input.value != "") {
-    console.log(input.value);
     addTodo(input.value);
   }
   input.value = "";
 }
 
 function handleDeleteOrCheck(e) {
-  //   e.preventDefault();
-  console.log(e.target.name);
   if (e.target.name == "deleteButton") {
     deleteTodo(e);
   }
@@ -26,6 +23,7 @@ function handleDeleteOrCheck(e) {
 
 function handleClearAll() {
   document.querySelector("ul").innerHTML = "";
+  todoCount();
 }
 
 function checkTodo(e) {
@@ -39,9 +37,9 @@ function checkTodo(e) {
 }
 
 function deleteTodo(e) {
-  console.log("inside delete");
   let item = e.target.parentNode;
   item.remove();
+  todoCount();
 }
 
 function addTodo(todo) {
@@ -56,4 +54,15 @@ function addTodo(todo) {
 
   li.classList.add("todo-list-item");
   ul.appendChild(li);
+  todoCount();
+}
+
+function todoCount() {
+  let ul = document.querySelector("ul");
+  let listItemCount = ul.getElementsByTagName("li");
+
+  let countElement = document.getElementById("todoCount");
+  let count = listItemCount.length;
+
+  countElement.innerHTML = `${count} tasks left`;
 }
